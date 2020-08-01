@@ -5,6 +5,8 @@ import json, os
 from PIL import Image, ImageTk
 from functools import partial
 
+def indexconvert(ind):
+    return ("00" + str(ind))[-3:]
 
 def resource_path(relative_path):
     try:
@@ -13,16 +15,12 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-def indexconvert(ind):
-    return ("00" + str(ind))[-3:]
-
 class Application(tk.Frame):
     pokebutton = []
     isFileLoaded = False
     selected = None
     routelist = []
     pokelist = []
-    gamename = "hgss"
 
     def __init__(self, master=None):
         super().__init__(master)
@@ -31,8 +29,9 @@ class Application(tk.Frame):
         self.master.title("RandoDex")
         self.ico = self.GetIconImage()
         self.master.iconphoto(True, self.ico)
+        self.gamename = tk.StringVar()
         self.pack()
-        self.create_widgets()
+        self.AskGame()
 
     def create_widgets(self):
         #creates all of the items in the program
@@ -125,7 +124,6 @@ class Application(tk.Frame):
             self.mapdict = json.load(file)
         with open(resource_path("data/gameinfo.json"), encoding="utf8") as file:
             self.gameinfo = json.load(file)
-            self.gameinfo = self.gameinfo.get("hgss")
 
     def selectpoke(self, ind):
         #actions performed whenever a pokemon is selected as long as a file is loaded
@@ -274,6 +272,33 @@ class Application(tk.Frame):
         img = Image.open(resource_path("data/maps/" + self.gamename + ".png"))
         img = img.resize(self.gameinfo.get("mapsize"), Image.ANTIALIAS)
         return ImageTk.PhotoImage(img)
+
+    def AskGame(self):
+        #Creates window that asks user which game they are playing
+        self.gamename.set("None")
+        self.firstframe = tk.Frame(self)
+        self.firstframe.pack()
+        for i, j in self.gameinfo.get("gamemenu"):
+            b = tk.Radiobutton(self.firstframe, text=i, value=j, variable=self.gamename)
+            b.pack(side="top", anchor="w")
+        b = tk.Button(self.firstframe, text="Select Game", command=self.SelectGame)
+        b.pack(side="bottom")
+
+    def SelectGame(self):
+        #Deletes game selection window opens application
+        if self.gamename.get() == "None":
+            return
+        elif self.gamename.get().startswith("notready"):
+            b = tk.Toplevel(self)
+            msg = tk.Label(b, text="Sorry, that hasn't been developed yet")
+            msg.pack()
+            return
+        self.firstframe.destroy()
+        self.gamename = self.gamename.get()
+        self.gameinfo = self.gameinfo.get(self.gamename)
+        self.master.geometry("1500x1000")
+        self.create_widgets()
+        self.pack()
 
 root = tk.Tk()
 app = Application(master=root)
