@@ -1,6 +1,6 @@
 # RandoDex 
 
-#### An program that takes in the log file of a randomized ROM an helps in showing the location of the randomized pokemon 
+#### A program that takes in the log file of a randomized ROM an helps in showing the location of the randomized pokemon 
 
 ## How Does It Work? 
 This program works in conjunction with the Universal Pokemon Game Randomizer, [found here](https://pokehacks.dabomstew.com/randomizer/index.php)
