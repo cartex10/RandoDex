@@ -21,7 +21,7 @@ class Application(tk.Frame):
     selected = None
     routelist = []
     pokelist = []
-
+    
     def __init__(self, master=None):
         super().__init__(master)
         self.loadjson()
@@ -29,6 +29,7 @@ class Application(tk.Frame):
         self.master.title("RandoDex")
         self.ico = self.GetIconImage()
         self.master.iconphoto(True, self.ico)
+        self.includeSwarms = tk.BooleanVar()
         self.gamename = tk.StringVar()
         self.pack()
         self.AskGame()
@@ -175,7 +176,8 @@ class Application(tk.Frame):
             setnum = 0 #used when removing extraneous info
             routelist = [] #the main list every route and pokemon is saved in
             locationnames = [] #the name of every location used to determine validity of user input
-            hyphenpoke = ["Ho-Oh", "Porygon-Z"]
+            hyphenpoke = ["Ho-Oh", "Porygon-Z"] #Stores names of pokemon with hyphens in their names
+            swarms = ["Swarms", "Radio"] #encounters not to be included if includeSwarms is False
             line = file.readline()
             #skips every line until the encounter log
             while line != "--Wild Pokemon--\n":
@@ -188,6 +190,14 @@ class Application(tk.Frame):
                 hasBeenAdded = False #used when checking if a location is already in routelist
                 tempstr = "" #used when concatenating location names after reading them from the file
                 templist = [] #used to hold info before being added to routelist
+                skipFlag = False 
+                #skips swarm encounters if includeSwarms is set to False
+                if not self.includeSwarms.get():
+                    for i in swarms:
+                        if i in line:
+                            skipFlag = True
+                if skipFlag:
+                    continue
                 #removes first few characters depending on the set number
                 if setnum < 10:
                     tempstring = line[9:]
@@ -292,8 +302,12 @@ class Application(tk.Frame):
         for i, j in self.gameinfo.get("gamemenu"):
             b = tk.Radiobutton(self.firstframe, text=i, value=j, variable=self.gamename)
             b.pack(side="top", anchor="w")
+        #Button to confirm selection
         b = tk.Button(self.firstframe, text="Select Game", command=self.SelectGame)
         b.pack(side="bottom")
+        #Button to select whether to include difficult pokemon to acquire
+        b = tk.Checkbutton(self.firstframe, text="Include Swarm/Radio Pokemon", variable=self.includeSwarms)
+        b.pack(side="right")
 
     def SelectGame(self):
         #Deletes game selection window, opens application
