@@ -112,7 +112,7 @@ class Application(tk.Frame):
             img = Image.open(resource_path("data/0.png"))
             img = img.resize((350, 350), Image.ANTIALIAS)
         elif size == "BIG":
-            img = Image.open(resource_path("data/sprites/" + self.gamename + "/" + str(dexnum) + ".png"))
+            img = Image.open(resource_path(self.gameinfo.get("spritelocation") + str(dexnum) + ".png"))
             img = img.resize(self.gameinfo.get("spriteresize"), Image.ANTIALIAS)
         return ImageTk.PhotoImage(img)
 
@@ -175,6 +175,7 @@ class Application(tk.Frame):
             setnum = 0 #used when removing extraneous info
             routelist = [] #the main list every route and pokemon is saved in
             locationnames = [] #the name of every location used to determine validity of user input
+            hyphenpoke = ["Ho-Oh", "Porygon-Z"]
             line = file.readline()
             #skips every line until the encounter log
             while line != "--Wild Pokemon--\n":
@@ -223,11 +224,23 @@ class Application(tk.Frame):
                     locationnames.append(tempstr[:-1])
                 #adds pokemon to templist
                 for i in thesplit[index+1:]:
-                    if not i.startswith('Lv') and '-' not in i:
+                    if (not i.startswith('Lv')) and (('-' not in i) or (i in hyphenpoke)):
                         templist.append(i)
-                        if i == "Jr.":
-                            templist[-2] += " Jr."
-                            del templist[-1]
+                #edits templist to account for certain pokemon
+                for i in templist:
+                    ind = templist.index(i)
+                    if "’" in i:
+                        i = i.replace("’", "'")
+                        templist[ind] = i.replace("’", "'")
+                    if i == "Jr.":
+                        if not templist[ind-1].endswith("Jr."):
+                            templist[ind-1] += " Jr."
+                        del i
+                    elif i == "Mr.":
+                        templist[ind] += " Mime"
+                        del templist[ind+1]
+                    elif i == "Farfetch'D":
+                        templist[ind] = i.replace("D", "d")
                 #adds the templist to the routelist if the area hasn't been added yet or appends if it has
                 if routelist == []:
                     routelist.append(templist)
@@ -252,8 +265,6 @@ class Application(tk.Frame):
             tempset = []
             for j in i:
                 if j not in tempset:
-                    if "’" in j:
-                        j = j.replace("’", "'")
                     tempset.append(j)
             self.routelist.append(tempset)
 
@@ -285,7 +296,7 @@ class Application(tk.Frame):
         b.pack(side="bottom")
 
     def SelectGame(self):
-        #Deletes game selection window opens application
+        #Deletes game selection window, opens application
         if self.gamename.get() == "None":
             return
         elif self.gamename.get().startswith("notready"):
