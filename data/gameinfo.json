@@ -15,7 +15,8 @@
 		"mapsize" : [0,0],
 		"mapcanvasheight" : 0,
 		"mapcanvaswidth" : 0,
-		"spriteresize" : [0, 0]
+		"spriteresize" : [0, 0],
+		"spritelocation" : "data/sprites/dp/"
 		},
 	"hgss": {
 		"scrollregion" : [0, 0, 836, 1850],
@@ -23,7 +24,8 @@
 		"mapsize" : [815, 327],
 		"mapcanvasheight" : 218,
 		"mapcanvaswidth" : 543,
-		"spriteresize" : [200, 200]
+		"spriteresize" : [200, 200],
+		"spritelocation" : "data/sprites/hgss/"
 		},
 	"bw": {
 		"scrollregion" : [0, 0, 0, 0],
@@ -31,6 +33,7 @@
 		"mapsize" : [0,0],
 		"mapcanvasheight" : 0,
 		"mapcanvaswidth" : 0,
-		"spriteresize" : [350, 350]
+		"spriteresize" : [350, 350],
+		"spritelocation" : "data/sprites/bwb2w2/"
 		}
 }
