@@ -156,8 +156,13 @@ class Application(tk.Frame):
     def fileLoader(self):
         #loads data from selected file
         #does nothing if no file has been browsed
-        if self.filename is None:
-            return                                                                      #add error message here
+        if self.filename.get() == "":
+            b = tk.Toplevel(self)
+            msg = tk.Label(b, text="No file has been selected")
+            msg.pack()
+            goback = tk.Button(b, text="Return", command=b.destroy)
+            goback.pack()
+            return
         #changes isFileLoaded flag and processes the data from the file
         self.isFileLoaded = True
         self.ParseFile()
@@ -320,7 +325,7 @@ class Application(tk.Frame):
             return
         elif self.gamename.get().startswith("notready"):
             b = tk.Toplevel(self)
-            msg = tk.Label(b, text="Sorry, that hasn't been developed yet")
+            msg = tk.Label(b, text="Sorry, that game hasn't been developed yet")
             msg.pack()
             goback = tk.Button(b, text="Return", command=b.destroy)
             goback.pack()
