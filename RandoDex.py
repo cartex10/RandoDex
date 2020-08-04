@@ -312,6 +312,11 @@ class Application(tk.Frame):
     def SelectGame(self):
         #Deletes game selection window, opens application
         if self.gamename.get() == "None":
+            b = tk.Toplevel(self)
+            msg = tk.Label(b, text="Please select a game first")
+            msg.pack()
+            goback = tk.Button(b, text="Return", command=b.destroy)
+            goback.pack()
             return
         elif self.gamename.get().startswith("notready"):
             b = tk.Toplevel(self)
