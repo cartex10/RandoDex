@@ -143,10 +143,16 @@ class Application(tk.Frame):
         #change selected pokemon index and perform selection functions on it
         self.selected = ind
         self.pokebutton[ind].config(relief="sunken")
+        #if the pokemon cannot be found, print image onto map
+        if len(self.pokelist[ind]) == 1:
+            img = self.GetErrorImage()
+            tup = (self.gameinfo.get("mapcanvaswidth")/2, self.gameinfo.get("mapcanvasheight")/2)
+            self.mappic.create_image(tup, anchor="center", tags="rect", image=img)
+            self.mappic.image1 = img
+            return
         #show new selection's location visuals on map
-        temp = self.mapdict.get(self.gamename)
         for i in self.pokelist[ind][1:]:
-            for j in temp.get(i):
+            for j in self.mapdict.get(i):
                 self.mappic.create_rectangle(j, fill="red", outline="red", tags="rect")
                 
     def fileBrowser(self):
@@ -333,9 +339,17 @@ class Application(tk.Frame):
         self.firstframe.destroy()
         self.gamename = self.gamename.get()
         self.gameinfo = self.gameinfo.get(self.gamename)
+        self.mapdict = self.mapdict.get(self.gamename)
         self.master.geometry("1500x1000")
         self.create_widgets()
         self.pack()
+
+    def GetErrorImage(self):
+        #returns error image if no pokemon location is found
+        img = Image.open(resource_path("data/0.png"))
+        img = img.resize((250, 250), Image.ANTIALIAS)
+        return ImageTk.PhotoImage(img)
+
 
 root = tk.Tk()
 app = Application(master=root)
