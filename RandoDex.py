@@ -322,6 +322,8 @@ class Application(tk.Frame):
             b = tk.Toplevel(self)
             msg = tk.Label(b, text="Sorry, that hasn't been developed yet")
             msg.pack()
+            goback = tk.Button(b, text="Return", command=b.destroy)
+            goback.pack()
             return
         self.firstframe.destroy()
         self.gamename = self.gamename.get()
