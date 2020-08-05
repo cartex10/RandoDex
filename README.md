@@ -13,4 +13,4 @@ When a game is put through the randomizer, there is an option to output the log 
 * Uses sprites from the respective games
 
 ## Credits for visuals
-[Pokemon icons](https://msikma.github.io/pokesprite/index.html) - [HGSS map](https://bulbapedia.bulbagarden.net/wiki/Mt._Silver) - [Pokemon Sprites](https://veekun.com/dex/downloads)
+[Pokemon icons](https://msikma.github.io/pokesprite/index.html) - [Region maps](https://archives.bulbagarden.net/wiki/Category:Town_maps) - [Pokemon Sprites](https://veekun.com/dex/downloads)
