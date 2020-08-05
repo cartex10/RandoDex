@@ -340,7 +340,7 @@ class Application(tk.Frame):
         self.gamename = self.gamename.get()
         self.gameinfo = self.gameinfo.get(self.gamename)
         self.mapdict = self.mapdict.get(self.gamename)
-        self.master.geometry("1500x1000")
+        self.master.geometry("1750x1000")
         self.create_widgets()
         self.pack()
 
