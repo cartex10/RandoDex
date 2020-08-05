@@ -4,30 +4,29 @@
 		["Gold, Silver, Crystal", "notready2"],
 		["Ruby, Sapphire, Emerald", "notready3"],
 		["FireRed, LeafGreen", "notready4"],
-		["Diamond, Pearl", "notready5"],
-		["Platinum", "notready6"],
+		["Diamond, Pearl, Platinum", "notready5"],
 		["Heartgold, Soulsilver", "hgss"],
 		["Black, White, Black 2, White 2", "notready7"]
 		],
-	"dp": {
+	"dppt": {
 		"scrollregion" : [0, 0, 0, 0],
 		"dexsize" : 0,
 		"mapsize" : [0,0],
 		"mapcanvasheight" : 0,
 		"mapcanvaswidth" : 0,
 		"spriteresize" : [0, 0],
-		"spritelocation" : "data/sprites/dp/"
+		"spritelocation" : "data/sprites/dppt/"
 		},
 	"hgss": {
 		"scrollregion" : [0, 0, 836, 1850],
 		"dexsize" : 493,
-		"mapsize" : [815, 327],
-		"mapcanvasheight" : 218,
-		"mapcanvaswidth" : 543,
+		"mapsize" : [1086, 436],
+		"mapcanvasheight" : 291,
+		"mapcanvaswidth" : 724,
 		"spriteresize" : [200, 200],
 		"spritelocation" : "data/sprites/hgss/"
 		},
-	"bw": {
+	"bwb2w2": {
 		"scrollregion" : [0, 0, 0, 0],
 		"dexsize" : 0,
 		"mapsize" : [0,0],
