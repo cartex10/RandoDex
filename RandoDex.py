@@ -105,16 +105,16 @@ class Application(tk.Frame):
                 pokename = temp.get("eng", "notfound")
             if pokename == "notfound":
                 img = Image.open(resource_path("data/icons/unknown-gen5.png"))
-                img = img.resize((90, 90), Image.ANTIALIAS)
+                img = img.resize((90, 90))
             else:
                 img = Image.open(resource_path("data/icons/" + pokename + ".png"))
-                img = img.resize((90, 90), Image.ANTIALIAS)
+                img = img.resize((90, 90))
         elif size == "BIG" and dexnum == 0:
             img = Image.open(resource_path("data/0.png"))
-            img = img.resize((350, 350), Image.ANTIALIAS)
+            img = img.resize((350, 350), Image.BOX)
         elif size == "BIG":
             img = Image.open(resource_path(self.gameinfo.get("spritelocation") + str(dexnum) + ".png"))
-            img = img.resize(self.gameinfo.get("spriteresize"), Image.ANTIALIAS)
+            img = img.resize(self.gameinfo.get("spriteresize"), Image.BOX)
         return ImageTk.PhotoImage(img)
 
     def loadjson(self):
@@ -178,7 +178,7 @@ class Application(tk.Frame):
         #returns icon for program
         img = Image.open(resource_path("data/egg-manaphy.png"))
         img = img.crop(box=(26, 35, 41, 51))
-        img = img.resize((500, 500), Image.ANTIALIAS)
+        img = img.resize((500, 500), Image.BOX)
         return ImageTk.PhotoImage(img)
 
     def ParseFile(self):
@@ -302,7 +302,7 @@ class Application(tk.Frame):
 
     def GetMap(self):
         img = Image.open(resource_path("data/maps/" + self.gamename + ".png"))
-        img = img.resize(self.gameinfo.get("mapsize"), Image.ANTIALIAS)
+        img = img.resize(self.gameinfo.get("mapsize"), Image.BOX)
         return ImageTk.PhotoImage(img)
 
     def AskGame(self):
@@ -347,9 +347,8 @@ class Application(tk.Frame):
     def GetErrorImage(self):
         #returns error image if no pokemon location is found
         img = Image.open(resource_path("data/0.png"))
-        img = img.resize((250, 250), Image.ANTIALIAS)
+        img = img.resize((250, 250), Image.BOX)
         return ImageTk.PhotoImage(img)
-
 
 root = tk.Tk()
 app = Application(master=root)

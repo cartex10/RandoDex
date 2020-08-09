@@ -15,7 +15,7 @@
 		"mapsize" : [540, 420],
 		"mapcanvasheight" : 430,
 		"mapcanvaswidth" : 540,
-		"spriteresize" : [200, 200],
+		"spriteresize" : [275, 275],
 		"spritelocation" : "data/sprites/dppt/"
 		},
 	"hgss": {
@@ -24,7 +24,7 @@
 		"mapsize" : [1086, 436],
 		"mapcanvasheight" : 291,
 		"mapcanvaswidth" : 724,
-		"spriteresize" : [200, 200],
+		"spriteresize" : [300, 300],
 		"spritelocation" : "data/sprites/hgss/"
 		},
 	"bw": {
