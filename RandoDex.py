@@ -85,7 +85,7 @@ class Application(tk.Frame):
         self.mappic.config(height=self.gameinfo.get("mapcanvasheight"))
         self.mappic.config(width=self.gameinfo.get("mapcanvaswidth"))
         mapimg = self.GetMap()
-        self.mappic.create_image((0, 0), image=mapimg, anchor="nw", tags="mapimg")
+        self.mappic.create_image((2, 2), image=mapimg, anchor="nw", tags="mapimg")
         self.mappic.image = mapimg
         self.mappic.pack()
         #used for testing self.mapdict
