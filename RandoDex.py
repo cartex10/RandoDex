@@ -89,7 +89,7 @@ class Application(tk.Frame):
         self.mappic.image = mapimg
         self.mappic.pack()
         #used for testing self.mapdict
-        #for i in self.mapdict.get(self.gamename).values():
+        #for i in self.mapdict.values():
         #    for j in i:
         #        self.mappic.create_rectangle(j, fill="red", outline="red", tags="rect")
 
@@ -152,6 +152,15 @@ class Application(tk.Frame):
             return
         #show new selection's location visuals on map
         for i in self.pokelist[ind][1:]:
+            if i == "? Unknown ?":
+                b = tk.Toplevel(self)
+                text = "There is an error in the log file,\nthe location returned is '? Unknown ?'.\n"
+                text += "This probably means it can be found \nsomewhere else on the map, but it is unsure where that is"
+                msg = tk.Label(b, text=text)
+                msg.pack()
+                goback = tk.Button(b, text="Return", command=b.destroy)
+                goback.pack()
+                continue
             for j in self.mapdict.get(i):
                 self.mappic.create_rectangle(j, fill="red", outline="red", tags="rect")
                 
